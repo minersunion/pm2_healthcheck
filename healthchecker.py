@@ -71,7 +71,7 @@ class HealthChecker:
                 try:
                     last_line_timestamp = log_reader.get_stats().get("last_line_timestamp")
                     last_line_delta = time.time() - last_line_timestamp
-                    if last_line_delta > 300: # no new logs for more than 5 minutes
+                    if last_line_delta > 900: # no new logs for more than 15 minutes
                         log(f"Restarting pm2 process {log_reader.pm2_process.name}")
                         log_reader.restart_pm2_process()
                     else:
