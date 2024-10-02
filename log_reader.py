@@ -27,6 +27,7 @@ class LogReader(threading.Thread):
         starting_timestamp = time.time()  # in seconds
         self.last_line_timestamp = starting_timestamp
         self.last_delay = 0
+        self.last_restart_block = 0
         # throw an error if the log file doesn't exist
         self.open_handle = open(self.pm2_process.pm_out_log_path)
 

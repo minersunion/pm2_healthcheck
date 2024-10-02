@@ -119,11 +119,13 @@ class HealthChecker:
                         except NotRegistered:
                             print(f"netuid: {netuid:<3} | not registered on netuid")
                             return
-                    
+
                         updated_block_since = curr_block - metagraph.last_update[validator_uid]
-                        if updated_block_since >= BLOCKS_WITHOUT_SETTING_WEIGHTS_THRESHOLD:
+                        x_blocks_since_last_restart = curr_block - log_reader.last_restart_block
+                        if updated_block_since >= BLOCKS_WITHOUT_SETTING_WEIGHTS_THRESHOLD and x_blocks_since_last_restart >= BLOCKS_WITHOUT_SETTING_WEIGHTS_THRESHOLD:
                             log(f"Restarting pm2 process {log_reader.pm2_process.name} cause it hasn't set weights in {BLOCKS_WITHOUT_SETTING_WEIGHTS_THRESHOLD} blocks")
                             log_reader.restart_pm2_process()
+                            log_reader.last_restart_block = curr_block
                     except Exception as e:
                         print(e)
             time.sleep(150)
