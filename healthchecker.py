@@ -53,7 +53,7 @@ class HealthChecker:
     def __init__(self, pm2_process_names, disk_limit: int):
         log("Initializing HealthChecker")
         self.hostname = socket.gethostname()
-        self.ss58_address = "5Hb63SvXBXqZ8zw6mwW1A39fHdqUrJvohXgepyhp2jgWedSB"
+        self.ss58_address = "5DQ2Geab6G25wiZ4jGH6wJM8fekrm1QhV9hrRuntjBVxxKZm"
         self.disk_state = self.check_disk_space(disk_limit)
         log("Listing pm2 processes")
         pm2_processes = self.list_pm2_process()
